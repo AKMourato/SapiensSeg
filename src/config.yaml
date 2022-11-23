@@ -1,0 +1,80 @@
+overall:
+    save_experiment: True
+    experiment_name: test_experiment
+
+data:
+    path_to_csv: /home/database/database-dl.xlsx
+    query: WholeHeart == "yes" & "Thorax" == "yes"
+    root_dir: 
+    verse_dir: 
+
+sharepoint-download-credentials:
+    url: 
+    location: 
+    client_id: 
+    client_secret: 
+    
+training:
+    batch_size: 1
+    train_val_ratio: 0.90
+    calculate_ce_weights: False
+    separate_cine_train_val: False
+    pretrained_model: 
+
+inference:
+    root_dir_prediction: 
+    model_weights: 
+    out_dir: ../network_predictions/
+
+benchmark:
+    test_patients: ["047", "131", "191", "617", "692", "693", "730", "753", "773", "850"]
+    model_weights:  
+    post_processing: True
+    out_dir: ../benchmark_results/
+
+setup:
+    heart:
+      n_classes: 8
+      roi_size: (96,96,96)
+      pix_dim: (1.0, 1.0, 1.0)
+      log_structures_order: [
+                "Background",
+                "Right Ventricle",
+                "Right Atrium",
+                "Pulmonary Valve",
+                "Left Ventricle",
+                "Left Atrium",
+                "Aorta",
+                "Myocardium"
+      ]
+      select_labels: []
+    thorax:
+      n_classes: 5
+      roi_size: (96,96,96)
+      pix_dim: (1.0, 1.0, 1.0)
+      log_structures_order: [
+                "Background",
+                "Ribs",
+                "Sternum",
+                "Lungs",
+                "Cartilage"
+      ]
+      select_labels: [1,2,3,4]
+    spine:
+      n_classes: 2
+      pix_dim: (1.0, 1.0, 1.0)
+      roi_size: (48,48,48)
+      log_structures_order: [
+                "Background",
+                "Spine"
+      ]
+      select_labels: [5]
+    diaphragm:
+        n_classes: 2
+        pix_dim: (1.5, 1.5, 1.5)
+        roi_size: (48, 48, 48)
+        log_structures_order: [
+                "Background",
+                "Diaphragm"
+        ]
+        select_labels: [6]
